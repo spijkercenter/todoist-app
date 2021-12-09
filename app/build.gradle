@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -57,5 +58,12 @@ dependencies {
     // Combining Retrofit and Moshi library for Kotlin
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
     implementation 'com.squareup.moshi:moshi-kotlin:1.12.0'
+
+    // Room and Lifecycle dependencies
+    implementation "androidx.room:room-runtime:2.4.0-rc01"
+    kapt "androidx.room:room-compiler:2.4.0-rc01"
+    // Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:2.4.0-rc01"
+
 
 }

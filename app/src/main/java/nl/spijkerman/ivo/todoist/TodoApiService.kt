@@ -31,8 +31,9 @@ interface TodoApiService {
     suspend fun postTodo(@Body item: TodoItem): TodoItem
 }
 
-object TodoApi {
-    val retrofitService: TodoApiService by lazy {
-        retrofit.create(TodoApiService::class.java)
-    }
-}
+// TODO restore
+//object TodoApi {
+//    val retrofitService: TodoApiService by lazy {
+//        retrofit.create(TodoApiService::class.java)
+//    }
+//}

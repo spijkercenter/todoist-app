@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
             binding.resultTv.text = viewModel.todoResult.value
         }
 
-        binding.deleteBtn.setOnClickListener { viewModel.deleteTodoItem() }
-        binding.getBtn.setOnClickListener { viewModel.getTodoItems() }
-        binding.postBtn.setOnClickListener { viewModel.postTodoItem() }
+        binding.deleteBtn.setOnClickListener { viewModel.deleteTodoItem(this) }
+        binding.getBtn.setOnClickListener { viewModel.getTodoItems(this) }
+        binding.postBtn.setOnClickListener { viewModel.postTodoItem(this) }
     }
 }
