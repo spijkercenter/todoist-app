@@ -14,6 +14,9 @@ interface TodoItemDao {
     @Query("delete from TodoItem where id = :key")
     suspend fun deleteTodo(key: Int)
 
+    @Query("delete from TodoItem")
+    suspend fun clear()
+
     @Insert
     suspend fun createTodo(item: TodoItem)
 }

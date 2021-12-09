@@ -6,19 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import nl.spijkerman.ivo.todoist.room.TodoistDatabase
 
 class TodoViewModel : ViewModel() {
 
     private val _todoResult = MutableLiveData<String>()
     val todoResult: LiveData<String> get() = _todoResult
 
-    private fun db(context: Context) = TodoistDatabase.getInstance(context)
-    private fun dao(context: Context) = db(context).todoItemDao()
-
     fun getTodoItems(context: Context) {
         viewModelScope.launch {
-            val todos: List<TodoItem> = dao(context).getTodos()
+            val todos: List<TodoItem> = TodoItemRepository.getTodos(context)
             val text = todos.joinToString("\n") { it.toString() }
             _todoResult.value = text
         }
@@ -26,9 +22,9 @@ class TodoViewModel : ViewModel() {
 
     fun postTodoItem(context: Context) {
         viewModelScope.launch {
-            val todoItem = TodoItem(999, "UI bouwen", false)
+            var todoItem = TodoItem(999, "UI bouwen", false)
 //            TodoApi.retrofitService.postTodo(todoItem)
-            dao(context).createTodo(todoItem)
+            todoItem = TodoItemRepository.createTodo(context, todoItem)
             _todoResult.value = "Created $todoItem"
         }
     }
@@ -36,7 +32,7 @@ class TodoViewModel : ViewModel() {
     fun deleteTodoItem(context: Context) {
         viewModelScope.launch {
             val id = 1
-            dao(context).deleteTodo(id)
+            TodoItemRepository.deleteTodo(context, id)
 //            TodoApi.retrofitService.deleteTodo(id)
             _todoResult.value = "Delete todo $id"
         }

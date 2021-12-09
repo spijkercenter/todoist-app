@@ -22,7 +22,8 @@ private val retrofit = Retrofit.Builder()
 interface TodoApiService {
 
     @GET("/todos")
-    suspend fun getTodos(): String
+    // TODO verify that this works
+    suspend fun getTodos(): List<TodoItem>
 
     @DELETE("/todos/{id}")
     suspend fun deleteTodo(@Path("id") id: Int)
@@ -31,9 +32,8 @@ interface TodoApiService {
     suspend fun postTodo(@Body item: TodoItem): TodoItem
 }
 
-// TODO restore
-//object TodoApi {
-//    val retrofitService: TodoApiService by lazy {
-//        retrofit.create(TodoApiService::class.java)
-//    }
-//}
+object TodoApi {
+    val retrofitService: TodoApiService by lazy {
+        retrofit.create(TodoApiService::class.java)
+    }
+}
